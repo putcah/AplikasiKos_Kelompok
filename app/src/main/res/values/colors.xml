@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_primary">#6F42D8</color>
+    <color name="purple_dark">#4D25B8</color>
+    <color name="purple_light">#EFE7FF</color>
+    <color name="pink_soft">#F36CA3</color>
+    <color name="blue_soft">#8DB8FF</color>
+    <color name="text_dark">#17151F</color>
+    <color name="text_muted">#6E7182</color>
+    <color name="line_soft">#E8E5EF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="screen_bg">#F8F6FC</color>
+</resources>

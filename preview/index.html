@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aplikasi Kos - Preview</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #f8f6fc;
+      color: #17151f;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    .phone {
+      width: min(414px, 100%);
+      height: 844px;
+      background: #fff;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(60, 42, 120, .18);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #eeeaf5;
+    }
+    .login-head {
+      height: 290px;
+      background: linear-gradient(135deg, #fff, #f3e9ff 52%, #dccaff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 24px 28px;
+      text-align: center;
+    }
+    .home-icon { font-size: 78px; color: #6f42d8; line-height: 1; }
+    h1 { margin: 8px 0 8px; font-size: 31px; }
+    .purple { color: #6f42d8; }
+    .muted { color: #6e7182; }
+    .login-form {
+      flex: 1;
+      padding: 28px 24px;
+      background: #fff;
+    }
+    label { display: block; font-weight: 700; margin: 0 0 10px; }
+    .input {
+      height: 54px;
+      border: 1px solid #dad6e5;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 14px;
+      color: #6e7182;
+      margin-bottom: 22px;
+      font-size: 15px;
+    }
+    .forgot { text-align: right; color: #4d25b8; font-size: 14px; margin-top: -10px; }
+    .btn {
+      width: 100%;
+      height: 58px;
+      border: 0;
+      border-radius: 10px;
+      color: white;
+      background: linear-gradient(90deg, #7748da, #5e31c7);
+      font-size: 18px;
+      font-weight: 700;
+      margin: 24px 0;
+      cursor: pointer;
+    }
+    .or { display: flex; align-items: center; gap: 20px; color: #6e7182; font-size: 14px; }
+    .or:before, .or:after { content: ""; flex: 1; height: 1px; background: #e8e5ef; }
+    .google {
+      height: 56px;
+      margin: 22px;
+      border: 1px solid #ece8f2;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 8px 18px rgba(40, 30, 80, .08);
+    }
+    .register { text-align: center; margin-top: 34px; }
+    .home { display: none; height: 100%; flex-direction: column; }
+    .home-head {
+      height: 226px;
+      background: linear-gradient(135deg, #7c4de3, #4f28b8);
+      padding: 48px 24px 0;
+      color: #fff;
+    }
+    .top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .top h2 { margin: 0; font-size: 26px; }
+    .top p { margin: 4px 0 0; font-size: 17px; }
+    .search {
+      margin-top: 24px;
+      height: 62px;
+      background: white;
+      border-radius: 12px;
+      color: #6e7182;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 14px;
+      box-shadow: 0 10px 20px rgba(40, 30, 80, .18);
+    }
+    .content { padding: 28px 22px 16px; overflow: auto; flex: 1; }
+    .section-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .section-title h3 { margin: 0; font-size: 20px; }
+    .section-title span { color: #4d25b8; font-size: 14px; }
+    .categories { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
+    .cat, .kos {
+      border: 1px solid #eeeaf5;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(40, 30, 80, .08);
+      background: #fff;
+    }
+    .cat { height: 126px; display: grid; place-items: center; text-align: center; padding: 10px; }
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #d9c8ff, #6b3bd3);
+      font-size: 26px;
+    }
+    .cat b { display: block; margin-top: 8px; font-size: 15px; }
+    .cat small { color: #6e7182; font-size: 13px; }
+    .kos {
+      min-height: 154px;
+      display: flex;
+      gap: 12px;
+      padding: 10px;
+      margin-bottom: 14px;
+      align-items: stretch;
+    }
+    .photo {
+      width: 112px;
+      flex: 0 0 112px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #c9d9ef, #efe8dc, #6a8c64);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 700;
+      font-size: 20px;
+    }
+    .kos-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .title-row { align-items: flex-start; }
+    .kos h4 { margin: 4px 0 8px; font-size: 18px; line-height: 1.15; }
+    .rating {
+      background: #6f42d8;
+      color: #fff;
+      border-radius: 5px;
+      padding: 5px 7px;
+      font-size: 12px;
+      font-weight: 700;
+      flex: 0 0 auto;
+      line-height: 1;
+    }
+    .address { font-size: 13px; line-height: 1.25; }
+    .features {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3px;
+      color: #6e7182;
+      font-size: 12px;
+      line-height: 1.2;
+      margin-top: 8px;
+    }
+    .bottom-row { margin-top: auto; padding-top: 8px; align-items: flex-end; }
+    .price { color: #4d25b8; font-weight: 700; font-size: 14px; line-height: 1.15; }
+    .detail {
+      width: 62px;
+      border: 1px solid #6f42d8;
+      color: #4d25b8;
+      border-radius: 6px;
+      padding: 6px 4px;
+      text-align: center;
+      font-size: 11px;
+      line-height: 1.1;
+      font-weight: 700;
+      flex: 0 0 auto;
+    }
+    .nav {
+      height: 76px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      box-shadow: 0 -5px 18px rgba(40, 30, 80, .08);
+    }
+    .nav div { display: grid; place-items: center; align-content: center; gap: 4px; font-size: 12px; }
+    .active { color: #4d25b8; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main class="phone">
+    <section id="login">
+      <div class="login-head">
+        <div class="home-icon">⌂</div>
+        <h1>Aplikasi <span class="purple">Kos</span></h1>
+        <div>Temukan kos terbaik<br>dengan mudah dan cepat</div>
+      </div>
+      <div class="login-form">
+        <label>Email</label>
+        <div class="input">✉ Masukkan email Anda</div>
+        <label>Password</label>
+        <div class="input">🔒 Masukkan password <span style="margin-left:auto">◉</span></div>
+        <div class="forgot">Lupa password?</div>
+        <button class="btn" onclick="showHome()">Login</button>
+        <div class="or">atau</div>
+        <div class="google"><b style="color:#4285f4">G</b>&nbsp; Login dengan Google</div>
+        <div class="register">Belum punya akun? <b class="purple">Daftar sekarang</b></div>
+      </div>
+    </section>
+
+    <section id="home" class="home">
+      <div class="home-head">
+        <div class="top">
+          <div>
+            <h2>Halo, Putri 👋</h2>
+            <p>Temukan kos impianmu disini!</p>
+          </div>
+          <div style="font-size:28px">♧</div>
+        </div>
+        <div class="search">⌕ <span style="flex:1">Cari kos, lokasi, atau nama kos...</span>☷</div>
+      </div>
+      <div class="content">
+        <div class="section-title"><h3>Kategori</h3><span>Lihat semua</span></div>
+        <div class="categories">
+          <div class="cat"><div><div class="avatar">👤</div><b>Kos Putra</b><small>120+ kos</small></div></div>
+          <div class="cat"><div><div class="avatar" style="background:linear-gradient(135deg,#ffd4e6,#ec5e98)">👤</div><b>Kos Putri</b><small>150+ kos</small></div></div>
+          <div class="cat"><div><div class="avatar" style="background:linear-gradient(135deg,#d8e8ff,#78a9ff)">👥</div><b>Kos Campur</b><small>80+ kos</small></div></div>
+        </div>
+        <div class="section-title"><h3>Rekomendasi Kos</h3><span>Lihat semua</span></div>
+        <div class="kos">
+          <div class="photo">Kos</div>
+          <div class="kos-info">
+            <div class="row title-row"><h4>Kos Melati</h4><span class="rating">★ 4.8</span></div>
+            <div class="muted address">Jl. Melati No. 10, Sleman</div>
+            <div class="features"><span>♨ Kamar Mandi Dalam</span><span>⌁ Wi-Fi</span></div>
+            <div class="row bottom-row"><span class="price">Rp750.000 / bulan</span><span class="detail">Lihat Detail</span></div>
+          </div>
+        </div>
+        <div class="kos">
+          <div class="photo">Kos</div>
+          <div class="kos-info">
+            <div class="row title-row"><h4>Kos Anggrek</h4><span class="rating">★ 4.9</span></div>
+            <div class="muted address">Jl. Anggrek No. 5, Sleman</div>
+            <div class="features"><span>♨ Kamar Mandi Dalam</span><span>⌁ AC</span></div>
+            <div class="row bottom-row"><span class="price">Rp900.000 / bulan</span><span class="detail">Lihat Detail</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="nav">
+        <div class="active">⌂<span>Beranda</span></div>
+        <div>♡<span>Favorit</span></div>
+        <div>▤<span>Pengajuan</span></div>
+        <div>♙<span>Profil</span></div>
+      </div>
+    </section>
+  </main>
+  <script>
+    function showHome() {
+      document.getElementById('login').style.display = 'none';
+      document.getElementById('home').style.display = 'flex';
+    }
+  </script>
+</body>
+</html>
